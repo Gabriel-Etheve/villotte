@@ -41,7 +41,6 @@
   <div id="spinner" class="spinner"></div>
   <script>
     window.addEventListener('load', function(ev) {
-      // Hide the spinner once the Flutter app is loaded
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
@@ -50,6 +49,10 @@
           engineInitializer.initializeEngine().then(function(appRunner) {
             document.getElementById('spinner').style.display = 'none';
             appRunner.runApp();
+          }).catch(function(error) {
+            console.error("Error initializing the Flutter app:", error);
+            document.getElementById('spinner').style.display = 'none';
+            alert("Failed to load the app. Please try again later.");
           });
         }
       });
